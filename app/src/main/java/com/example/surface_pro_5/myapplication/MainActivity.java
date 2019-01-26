@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mButtonTrue;//成员变量m开头，Android编程命名规范
+    private Button mButtonTrue;//成员变量m开头，Android编程命名约定
     private Button mButtonFalse;
     private TextView mQuestionTextView;//显示题目
     private Button mButtonNext;//下一题按钮
