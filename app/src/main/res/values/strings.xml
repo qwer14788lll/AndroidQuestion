@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">我的Android复习手册</string>
+    <string name="Text_question">Hello World! My One Test</string>
+    <string name="Button_true">正确</string>
+    <string name="Button_false">错误</string>
+    <string name="Toast_BT">你点击了左边的按钮</string>
+    <string name="Toast_BF">你点击了右边的按钮</string>
+    <string name="Button_Next">下一题</string>
+    <string name="Button_Reset">重新复习</string>
+</resources>
