@@ -49,9 +49,15 @@
             android:id="@+id/Button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_button_next"
             android:layout_margin="18dp"
             android:enabled="false"
-            android:drawableEnd="@drawable/ic_button_next"
             android:text="@string/Button_Next" />
+
+        <Button
+            android:id="@+id/Button_Tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Button_Answer" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

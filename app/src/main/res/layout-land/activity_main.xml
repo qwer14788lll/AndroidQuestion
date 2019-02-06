@@ -21,6 +21,14 @@
             android:text="@string/Text_question"
             android:textSize="24sp" />
 
+        <Button
+            android:id="@+id/Button_Tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_margin="12dp"
+            android:text="@string/Button_Answer" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

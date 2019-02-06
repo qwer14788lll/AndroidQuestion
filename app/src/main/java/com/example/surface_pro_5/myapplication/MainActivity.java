@@ -1,6 +1,9 @@
 package com.example.surface_pro_5.myapplication;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonNext;//下一题按钮
     private int mQuestionsIndex=0;//题目索引
     private Question[] mQuestions=new Question[]{//以数组方式存储和调用题目数据
-            new Question(R.string.Q1,true),
+            new Question(R.string.Q1,false),
             new Question(R.string.Q2,true),
             new Question(R.string.Q3,true),
             new Question(R.string.Q4,true),
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     //private int sum=0;//未来用作计分
     private static final String TAG="MainActivity";//日志来源
     private static final String KEY_INDEX="index";//用于传递Bundle的键
+    private static final int REQUEST_CODE_ANSWER = 10;//请求代码（表示发给AnswerActivity的）
+    private Button mButtonAnswer;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {//重写保存状态方法
@@ -101,7 +105,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        mButtonAnswer=findViewById(R.id.Button_Tips);
+        mButtonAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String temp;
+                if(mQuestions[mQuestionsIndex].isAnswer())
+                {
+                    temp="正确";
+                }
+                else {
+                    temp="错误";
+                }
+                Intent intent=new Intent();//实例化Intent对象
+                intent.putExtra("mes",temp);//以键值对的形式保存信息数据
+                intent.setClass(MainActivity.this, AnswerActivity.class);//异步消息传递要调用的（包名,类名）
+                //Intent intent=new Intent(MainActivity.this, AnswerActivity.class);//如果不传递任何值，可直接以构造方法调用
+                //boolean a=mQuestions[mQuestionsIndex].isAnswer();//获取答案
+                //Intent intent=AnswerActivity.newIntent(MainActivity.this,a);//封装到intent对象中
+                //startActivity(intent);//调用activity
+                startActivityForResult(intent,REQUEST_CODE_ANSWER);//需要返回值的调用方法，第一个参数上面的方法相同，第二个参数为请求代码（由开发者自定义）
+                //有时，在一个activity启动多个不同类型的子activity，且需要判断消息回馈方时，就会用到该请求代码
+            }
+        });
     }
 
     private void updateQuestion()//获取题目方法
@@ -168,5 +194,17 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onDestroy();
         Log.d(TAG,"onDestroy()销毁"+TAG);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {//重写处理返回结果方法，请求代码，结果代码，Intent对象
+        if (resultCode == Activity.RESULT_OK)
+        {
+            String result = data.getStringExtra("answer_shown");
+            Toast.makeText(MainActivity.this,result,Toast.LENGTH_SHORT).show();
+        }
+        //请求代码比喻为谁发起的请求
+        //结果代码比喻为谁返回了数据
+        //Intent对象比喻为数据内容
     }
 }

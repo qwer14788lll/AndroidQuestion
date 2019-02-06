@@ -7,4 +7,6 @@
     <string name="Toast_BF">你点击了右边的按钮</string>
     <string name="Button_Next">下一题</string>
     <string name="Button_Reset">重新复习</string>
+    <string name="Button_Answer">查看答案？</string>
+    <string name="Button_Return">返回</string>
 </resources>
