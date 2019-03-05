@@ -14,10 +14,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mButtonTrue;//成员变量m开头，Android编程命名约定
+    private Button mButtonTrue;//组件成员变量m开头，Android编程命名约定
     private Button mButtonFalse;
     private TextView mQuestionTextView;//显示题目
     private Button mButtonNext;//下一题按钮
+    private Button mButtonAnswer;//查看答案按钮
     private int mQuestionsIndex=0;//题目索引
     private Question[] mQuestions=new Question[]{//以数组方式存储和调用题目数据
             new Question(R.string.Q1,false),
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";//日志来源
     private static final String KEY_INDEX="index";//用于传递Bundle的键
     private static final int REQUEST_CODE_ANSWER = 10;//请求代码（表示发给AnswerActivity的）
-    private Button mButtonAnswer;
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {//重写保存状态方法
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     mButtonNext.setText(R.string.Button_Reset);//更换钮换文字
                     updateButtonNext(R.drawable.ic_button_reset);//更换按钮图片
                 }
-                if(mQuestionsIndex==0)//判断是都为第一题
+                if(mQuestionsIndex==0)//判断是否为第一题
                 {
                     mButtonNext.setText(R.string.Button_Next);//更换按钮文字
                     updateButtonNext(R.drawable.ic_button_next);//更换按钮图片
@@ -194,6 +195,12 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onDestroy();
         Log.d(TAG,"onDestroy()销毁"+TAG);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG,"onRestart()我又肥来了");
     }
 
     @Override

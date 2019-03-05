@@ -3,11 +3,6 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
-        <entry key="imageWizard">
-          <value>
-            <PersistentState />
-          </value>
-        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -19,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_button_next" />
-                            <entry key="sourceFile" value="C:\Users\Surface_Pro_5\Desktop\方向.svg" />
+                            <entry key="outputName" value="ic_next" />
+                            <entry key="sourceFile" value="C:\Users\Surface_Pro_5\Desktop\next.svg" />
                           </map>
                         </option>
                       </PersistentState>
