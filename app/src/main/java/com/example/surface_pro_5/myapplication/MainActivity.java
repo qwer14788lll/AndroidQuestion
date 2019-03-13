@@ -2,9 +2,14 @@ package com.example.surface_pro_5.myapplication;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ANSWER = 10;//请求代码（表示发给AnswerActivity的）
     private TranslateAnimation mTranslateAnimation;//平移
     private AlphaAnimation mAlphaAnimation;//透明度
+    String channelId = "chat";//测试阶段
+    String channelName = "聊天消息";//测试阶段
+    int importance = NotificationManager.IMPORTANCE_HIGH;//测试阶段
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {//重写保存状态方法
@@ -64,23 +72,24 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
 
+        createNotificationChannel(channelId, channelName, importance);//测试阶段
+
         mButtonTrue = findViewById(R.id.Button_true);//引用组件赋值给成员变量
         mButtonFalse = findViewById(R.id.Button_false);
-
         mButtonTrue.setOnClickListener(new View.OnClickListener() {//此处采用匿名内部类实现View.setOnClickListener接口，并重写唯一的onClick方法
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,R.string.Toast_BT,Toast.LENGTH_SHORT).show();//字符串资源引用方式
                 //Toast.makeText(MainActivity.this,"你点击了左边的按钮",Toast.LENGTH_SHORT).show();//硬编码字符串方式
                 //消息提示框.显示文本信息(指明要显示消息的Activity,显示内容（字符串资源引用/硬编码字符串）,消息停留时长)
-                checkQuestion(true);
+                checkQuestion(true,v);
             }
         });
         mButtonFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,R.string.Toast_BF,Toast.LENGTH_SHORT).show();
-                checkQuestion(false);
+                checkQuestion(false,v);
             }
         });
 
@@ -149,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView.startAnimation(mAlphaAnimation);
     }
 
-    private void checkQuestion(boolean userAnswer)//检验用户答题方法
+    private void checkQuestion(boolean userAnswer,View v)//检验用户答题方法,View为测试阶段变量
     {
         boolean trueAnswer = mQuestions[mQuestionsIndex].isAnswer();
         int message;
@@ -162,6 +171,28 @@ public class MainActivity extends AppCompatActivity {
             mButtonNext.setEnabled(false);
         }
         Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+        sendChatMsg(v);//测试阶段
+    }
+
+    private void createNotificationChannel(String channelId, String channelName, int importance) //测试阶段
+    {
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
+    }
+
+    public void sendChatMsg(View view)//测试阶段
+    {
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Notification notification = new NotificationCompat.Builder(this, "chat")
+                .setContentTitle("收到一条聊天消息")
+                .setContentText("test")
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_button_next)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_button_next))
+                .setAutoCancel(true)
+                .build();
+        manager.notify(1, notification);
     }
 
     private void updateButtonNext(int imageID)//用于更换(Next)按钮的图片
