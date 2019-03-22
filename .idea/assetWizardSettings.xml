@@ -133,8 +133,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_aiqiyi" />
-                            <entry key="sourceFile" value="C:\Users\Surface_Pro_5\Desktop\aiqiyi.svg" />
+                            <entry key="outputName" value="ic_logo_chrome" />
+                            <entry key="sourceFile" value="C:\Users\Surface_Pro_5\Desktop\logo-chrome.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
@@ -82,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this,R.string.Toast_BT,Toast.LENGTH_SHORT).show();//字符串资源引用方式
                 //Toast.makeText(MainActivity.this,"你点击了左边的按钮",Toast.LENGTH_SHORT).show();//硬编码字符串方式
                 //消息提示框.显示文本信息(指明要显示消息的Activity,显示内容（字符串资源引用/硬编码字符串）,消息停留时长)
-                checkQuestion(true,v);
+                checkQuestion(true, v);
             }
         });
         mButtonFalse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,R.string.Toast_BF,Toast.LENGTH_SHORT).show();
-                checkQuestion(false,v);
+                checkQuestion(false, v);
             }
         });
 
@@ -130,13 +131,13 @@ public class MainActivity extends AppCompatActivity {
                     temp = "错误";
                 }
                 Intent intent = new Intent();//实例化Intent对象
-                intent.putExtra("mes", temp);//以键值对的形式保存信息数据
+                intent.putExtra("msg", temp);//以键值对的形式保存信息数据
                 intent.setClass(MainActivity.this, AnswerActivity.class);//异步消息传递要调用的（包名,类名）
+                startActivityForResult(intent, REQUEST_CODE_ANSWER);//需要返回值的调用方法，第一个参数为intent对象，第二个参数为请求代码（由开发者自定义）
                 //Intent intent=new Intent(MainActivity.this, AnswerActivity.class);//如果不传递任何值，可直接以构造方法调用
                 //boolean a=mQuestions[mQuestionsIndex].isAnswer();//获取答案
                 //Intent intent=AnswerActivity.newIntent(MainActivity.this,a);//封装到intent对象中
                 //startActivity(intent);//调用activity
-                startActivityForResult(intent, REQUEST_CODE_ANSWER);//需要返回值的调用方法，第一个参数上面的方法相同，第二个参数为请求代码（由开发者自定义）
                 //有时，在一个activity启动多个不同类型的子activity，且需要判断消息回馈方时，就会用到该请求代码
             }
         });
@@ -146,19 +147,21 @@ public class MainActivity extends AppCompatActivity {
     {
         int i = mQuestions[mQuestionsIndex].getTextId();//获取题目的资源ID
         mQuestionTextView.setText(i);//显示出来
-        mTranslateAnimation = new TranslateAnimation(0, 200, 0, 0);//这四个参数含义分别是当前View x起点坐标、x终点坐标、y起点坐标、y终点坐标
-        mTranslateAnimation.setDuration(2000);//动画持续时间
-        mTranslateAnimation.setRepeatCount(1);//重复次数(不包括第一次)
+        mTranslateAnimation = new TranslateAnimation(-5, 5, 0, 0);//这四个参数含义分别是当前View x起点坐标、x终点坐标、y起点坐标、y终点坐标
+        mTranslateAnimation.setDuration(100);//动画持续时间
+        mTranslateAnimation.setRepeatCount(5);//重复次数(不包括第一次)
         mTranslateAnimation.setRepeatMode(Animation.REVERSE);//动画执行模式
 
         mAlphaAnimation = new AlphaAnimation(0, 1);
         mAlphaAnimation.setDuration(1000);
         mAlphaAnimation.setRepeatMode(Animation.REVERSE);
+        //mAlphaAnimation.setFillAfter(true);//设置结束时状态，为true保持结束时状态，false变回原先的状态
 
-        mQuestionTextView.startAnimation(mAlphaAnimation);
+        Animation set = AnimationUtils.loadAnimation(this,R.anim.animation_list);
+        mQuestionTextView.startAnimation(set);
     }
 
-    private void checkQuestion(boolean userAnswer,View v)//检验用户答题方法,View为测试阶段变量
+    private void checkQuestion(boolean userAnswer, View v)//检验用户答题方法,View为测试阶段变量
     {
         boolean trueAnswer = mQuestions[mQuestionsIndex].isAnswer();
         int message;
@@ -239,13 +242,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {//重写处理返回结果方法，请求代码，结果代码，Intent对象
-        if (resultCode == Activity.RESULT_OK) {
-            String result = data.getStringExtra("answer_shown");
-            Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//重写处理返回数据的方法，请求代码，返回代码，Intent对象
+        if (requestCode == REQUEST_CODE_ANSWER)//检查请求代码，如果为REQUEST_CODE_ANSWER，则说明是AnswerActivity返回的信息
+        {
+            if (resultCode == Activity.RESULT_OK) //检查返回代码，确认是AnswerActivity中的onCreate方法返回的数据
+            {
+                String result = data.getStringExtra("answer_shown");//取出对应键的值
+                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+            }
         }
         //请求代码比喻为谁发起的请求
-        //结果代码比喻为谁返回了数据
+        //返回代码比喻为谁返回了数据
         //Intent对象比喻为数据内容
     }
 }

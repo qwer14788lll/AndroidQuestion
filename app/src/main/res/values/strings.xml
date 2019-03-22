@@ -10,4 +10,5 @@
     <string name="Button_Answer">查看答案？</string>
     <string name="Button_Return">返回</string>
     <string name="Toast_Answer">您已经查看了答案</string>
+    <string name="About_Me">联系开发者</string>
 </resources>

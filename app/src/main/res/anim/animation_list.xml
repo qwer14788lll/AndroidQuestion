@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- alpha 透明度 -->
+    <!-- duration 动画持续时间 -->
+    <!-- fromAlpha 动画起始时透明度，从0.0到1.0 ，0.0表示全透明，1.0表示完全不透明 -->
+    <!-- toAlpha 动画结束时透明度 -->
+    <alpha
+        android:duration="1000"
+        android:fromAlpha="0"
+        android:toAlpha="1" />
+
+    <!-- scale 缩放 -->
+    <!-- fromXScale 起始的X方向上相对自身的缩放比例，浮点值，比如1.0代表自身无变化，0.5代表起始时缩小一倍，2.0代表放大一倍 -->
+    <!-- pivotX 缩放起点X轴坐标，可以是数值、百分数、百分数p 三种样式，比如 50、50%、50%p，
+    当为数值时，表示在当前View的左上角，即原点处加上50px，做为起始缩放点；
+    如果是50%，表示在当前控件的左上角加上自己宽度的50%做为起始点；
+    如果是50%p，那么就是表示在当前的左上角加上父控件宽度的50%做为起始点x轴坐标 -->
+    <!-- toXScale 结尾的X方向上相对自身的缩放比例，浮点值 -->
+    <scale
+        android:duration="500"
+        android:fromXScale="0"
+        android:fromYScale="0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="1"
+        android:toYScale="1" />
+
+    <!-- fromDegrees 开始旋转的角度位置，正值代表顺时针方向度数，负值代码逆时针方向度数 -->
+    <!-- toDegrees 结束时旋转到的角度位置 -->
+    <!-- rotate 旋转 -->
+    <!-- rotate 旋转 -->
+    <rotate
+        android:duration="500"
+        android:fromDegrees="0"
+        android:toDegrees="360"
+        android:pivotX="50%"
+        android:pivotY="50%" />
+
+    <!-- translate 移动 -->
+    <!-- fromXDelta 起始点X轴坐标，可以是数值、百分数、百分数p 三种样式，比如 50、50%、50%p，与scale的fromXScale相同 -->
+    <!-- toXDelta 结束点X轴坐标 -->
+    <!-- translate 移动 -->
+    <!-- translate 移动 -->
+    <!--<translate-->
+        <!--android:fromXDelta="-5"-->
+        <!--android:fromYDelta="0"-->
+        <!--android:toXDelta="5"-->
+        <!--android:toYDelta="0"-->
+        <!--android:duration="100"-->
+        <!--android:repeatCount="5"/>-->
+</set>
