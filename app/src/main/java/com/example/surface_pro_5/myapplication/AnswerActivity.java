@@ -23,14 +23,11 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.target.Target;
-
 import java.util.Objects;
 
-import static android.animation.ValueAnimator.ofArgb;
 
 public class AnswerActivity extends AppCompatActivity {
 

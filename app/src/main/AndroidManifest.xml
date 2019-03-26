@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.surface_pro_5.myapplication">
 
-    <uses-feature android:name="android.hardware.bluetooth" android:required="true" />
-    <uses-feature android:name="android.hardware.camera" />
-
-    <!--使用电话 -->
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <!--使用网络 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--读取手机信息权限 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限  -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <!--读取联系人权限，上传联系人需要用到此权限 -->
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-
-    <!--它可以监听用户的连接状态并在用户重新连接到网络时重启之前失败的请求-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!--用于硬盘缓存和读取-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera" /> <!-- 使用电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 使用网络 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 读取手机信息权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 读取联系人权限，上传联系人需要用到此权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 它可以监听用户的连接状态并在用户重新连接到网络时重启之前失败的请求 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 用于硬盘缓存和读取 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AnswerActivity"></activity>
+        <activity android:name=".GetRequest"></activity>
+        <activity android:name=".AnswerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
